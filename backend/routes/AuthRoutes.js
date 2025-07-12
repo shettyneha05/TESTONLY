@@ -1,11 +1,14 @@
-const express = require('express');
-const { 
+import express from 'express';
+import { 
   login, 
   register, 
   getUsers, 
-  deleteUser 
-} = require('../controllers/authControllers');
+  deleteUser, 
+  me
+} from '../controllers/authControllers.js';
+import authenticate from '../middleware/auth.js';
 const router = express.Router();
+
 
 // POST -----/api/auth/register
 router.post('/register', register);
@@ -19,4 +22,6 @@ router.get('/users', getUsers);
 // DELETE -- /api/auth/users/:id
 router.delete('/users/:id', deleteUser);
 
-module.exports = router;
+router.get('/me',authenticate, me);
+
+export default router;

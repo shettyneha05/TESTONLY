@@ -1,11 +1,12 @@
-const express=require('express');
-const {createTask, getTasks, updateTask, deleteTask }=require('../controllers/taskController'); // we need taskController code
-const authMiddleware=require('../middleware/auth'); //we need auth.js code
+import express from 'express';
+import {createTask, getTasks, deleteTask, updateTasks } from '../controllers/taskController.js' ; // we need taskController code
+//we need auth.js code
+import authMiddleware from '../middleware/auth.js';
 
 const router=express.Router();
 router.post('/',authMiddleware,createTask);
 router.get('/',authMiddleware,getTasks);
-router.put('/:taskId',authMiddleware,updateTask);
+router.put('/:taskId',authMiddleware,updateTasks);
 router.delete('/:taskId',authMiddleware,deleteTask);
 
-module.exports=router;
+export default router;

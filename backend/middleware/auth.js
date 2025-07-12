@@ -1,12 +1,15 @@
-const jwt=require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 const authenticate=(req,res,next)=>{
     const authHeader=req.headers['authorization'];
-    const token=authHeader && authHeader.split('')[1];
+    console.log("authHeader:",authHeader);  
+    console.log("list:",authHeader.split(' '));     
+    const token = authHeader && authHeader.startsWith('Bearer ') ? authHeader.split(' ')[1] : null;
     if(!token) return res.status(401).json({message:'Authorization token is required'})
 
     try{
         const decoded=jwt.verify(token,process.env.JWT_SECRET);
+        console.log("decoded:",decoded);
         req.user=decoded;
         next();
     }catch(err){
@@ -14,4 +17,4 @@ const authenticate=(req,res,next)=>{
     }
 };
 
-module.exports=authenticate;
+export default authenticate;

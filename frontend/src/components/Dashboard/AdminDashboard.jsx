@@ -3,7 +3,7 @@ import { useAuth } from '../../context/AuthProvider';
 import Header from '../other/Header';
 import CreateTask from '../other/CreateTask';
 import AllTask from '../other/AllTask';
-import api, { fetchTasks, fetchUsers } from '../../utils/api';
+import { fetchTasks, fetchUsers } from '../../utils/api';
 
 const AdminDashboard = () => {
   const { user, logout } = useAuth();

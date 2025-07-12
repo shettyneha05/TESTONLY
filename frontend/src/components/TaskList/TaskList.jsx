@@ -5,7 +5,7 @@ import NewTask from './NewTask';
 import CompleteTask from './CompleteTask';
 import FailedTask from './FailedTask';
 
-const TaskList = ({ user, tasks, updateTaskInState }) => {
+const TaskList = ({ tasks, updateTaskInState }) => {
   const handleStatusChange = async (taskId, newStatus) => {
     try {
       await updateTaskStatus(taskId, newStatus);

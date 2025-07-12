@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { login as loginUser, register as signupUser } from '../../utils/api';
 
-const Login = ({ handleLogin }) => {
+const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -34,12 +34,10 @@ const Login = ({ handleLogin }) => {
         const { data } = await loginUser({ email, password });
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
-        handleLogin(data.user);
       } else {
         const { data } = await signupUser({ name, email, password });
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
-        handleLogin(data.user);
         setIsLogin(true);
       }
     } catch (error) {

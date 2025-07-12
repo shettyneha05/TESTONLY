@@ -1,8 +1,16 @@
-const User = require('../models/User');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+import User from '../models/User.js';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import authenticate from '../middleware/auth.js';
 
-exports.register = async (req, res) => {
+
+export const me = async (req, res) => {
+  const user = req.user;
+  console.log(user);
+  res.json({ user });
+}
+
+export const register = async (req, res) => {
   const { name, email, password } = req.body;
   
   try {
@@ -30,7 +38,7 @@ exports.register = async (req, res) => {
   }
 };
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
   const { email, password } = req.body;
   
   try {
@@ -52,6 +60,7 @@ exports.login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
+    console.log("Token:",token);
 
     res.json({ 
       token, 
@@ -68,7 +77,7 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.getUsers = async (req, res) => {
+export const getUsers = async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);
@@ -78,7 +87,7 @@ exports.getUsers = async (req, res) => {
   }
 };
 
-exports.deleteUser = async (req, res) => {
+export const deleteUser = async (req, res) => {
   try {
     await User.findByIdAndDelete(req.params.id);
     res.json({ message: 'User deleted successfully' });

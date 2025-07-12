@@ -3,17 +3,16 @@ import { useAuth } from '../../context/AuthProvider';
 import Header from '../other/Header';
 import TaskListNumbers from '../other/TaskListNumbers';
 import TaskList from '../TaskList/TaskList';
-import api from '../../utils/api';
+import {fetchTasks} from '../../utils/api';
 
 const EmployeeDashboard = () => {
   const { user, logout } = useAuth();
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchTasks = async () => {
+  const fetchTasksfun = async () => {
       try {
-        const response = await fetchTasks('/tasks/my-tasks'+);
+        const response = await fetchTasks();
         setTasks(response.data);
       } catch (error) {
         console.error('Failed to fetch tasks:', error);
@@ -21,12 +20,15 @@ const EmployeeDashboard = () => {
         setLoading(false);
       }
     };
-    fetchTasks();
+
+  useEffect(() => {
+    fetchTasksfun();
   }, [user]);
+
 
   const refreshTasks = async () => {
     try {
-      const response = await api.get('/tasks/my-tasks');
+      const response = await fetchTasks();
       setTasks(response.data);
     } catch (error) {
       console.error('Failed to refresh tasks:', error);
@@ -51,4 +53,3 @@ const EmployeeDashboard = () => {
 };
 
 export default EmployeeDashboard;
-

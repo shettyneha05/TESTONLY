@@ -1,6 +1,6 @@
-const Task=require('../models/Task');
+import Task from '../models/Task.js';
 
-exports.getTasks=async(req,res)=>{
+export const getTasks=async(req,res)=>{
     try{
         const tasks=await Task.find().populate('assignedTo','name email');
         res.json(tasks);
@@ -9,7 +9,7 @@ exports.getTasks=async(req,res)=>{
     }
 };
 
-exports.createTask=async(req,res)=>{
+export const createTask=async(req,res)=>{
     const { taskTitle, taskDescription, taskDate, category, assignedTo }=req.body;
     try{
         const newTask=new Task({ taskTitle, taskDescription, taskDate, category, assignedTo});
@@ -20,7 +20,7 @@ exports.createTask=async(req,res)=>{
     }
 };
 
-exports.updateTasks=async(req,res)=>{
+export const updateTasks=async(req,res)=>{
     const {taskId}=req.params;
     const {status}=req.body;
     try{
@@ -31,7 +31,7 @@ exports.updateTasks=async(req,res)=>{
     }
 };
 
-exports.deleteTask=async(req,res)=>{
+export const deleteTask=async(req,res)=>{
     const {taskId}=req.params;
     try{
         await Task.findByIdAndUpdate(taskId);

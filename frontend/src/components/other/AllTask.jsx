@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import EmployeeTaskDetails from './EmployeeTaskDetails';
-import api from '../../utils/api';
+//import api from '../../utils/api';
 
 const AllTask = ({ tasks, employees, refreshTasks }) => {
   const [selectedEmployee, setSelectedEmployee] = useState(null);
@@ -21,7 +21,7 @@ const AllTask = ({ tasks, employees, refreshTasks }) => {
     setShowTaskDetails(true);
   };
 
-  const handleTaskDeleted = (taskId) => {
+  const handleTaskDeleted = () => {
     refreshTasks();
   };
 

@@ -1,0 +1,33 @@
+
+@import "tailwindcss";
+
+* {
+  color: #fff;
+}
+body {
+  background-color: #111;
+}
+
+#tasklist::-webkit-scrollbar {
+  background-color: transparent;
+  height: 5px;
+}
+#tasklist::-webkit-scrollbar-thumb {
+  background-color: rgb(143, 143, 143);
+  border-radius: 50px;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style {
+  transform-style: preserve-3d;
+}
+
+
